@@ -9,6 +9,7 @@ ReactDom.render(
     element,
     document.getElementById('root')
 )
+//DOM에 렌더하는 법
 ```
 
 ```jsx
@@ -23,6 +24,7 @@ function nameparameter(){
         내 이름은 {element}
     )
 }
+//jsx객체 가져다 쓰는 법
 ```
 
 ```jsx
@@ -38,7 +40,7 @@ const user = {
 const element = (
     {Hello(user)}
 );
-
+//이런식으로 써도댐요
 ```
 
 
@@ -151,7 +153,7 @@ class LoggingButton extends React.Component {
 }
 ```
 바인딩 할 필요는 없지만 성능면에서 별로..
-하지만 일단 이렇게 쓰자!
+하지만 일단 이렇게 쓰자!(어려버~)
 
 ---
 #### 조건부 연산자
@@ -218,6 +220,70 @@ class App extends React.Component {
 
 }
 export default App;
+```
+```jsx
+//select 태그에 multiple 옵션을 허용한다면 value 어트리뷰트에 배열을 전달할 수 있슴!
+<select multiple={true} value={['B', 'C']}>
+```
 
+
+```jsx
+//요놈은 다중제어임다 Submit이랑 등등 추가했음@
+import React from 'react';
+
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          isGoing: true,
+          numberOfGuests: 2
+        };
+    
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit= this.handleSubmit.bind(this);
+      }
+    
+      handleInputChange(event) {    //다중 제어의 포인트! 
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value; //타입이 chectbox면 체크하고 아니면 밸류로 넣어라!
+        const name = target.name;
+    
+        this.setState({
+          [name]: value //computed property name <= 속성명으로 들어감
+        });
+      }
+      
+      handleSubmit = (event) =>  {
+        alert("isGoing : "+ this.state.isGoing +" and "+ "numberOfGuest :" + this.state.numberOfGuests);
+        event.preventDefault(); //이걸 써주면 submit후에도 초기화 방지!(렌더링 시키지 않고 유지한다ㅇ)
+    }
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Is going:
+              <input
+                name="isGoing"
+                type="checkbox"
+                checked={this.state.isGoing}
+                onChange={this.handleInputChange} />
+            </label>
+            <br />
+            <label>
+              Number of guests:
+              <input
+                name="numberOfGuests"
+                type="number"
+                value={this.state.numberOfGuests}
+                onChange={this.handleInputChange} />
+            </label>
+          </form>
+        );
+      }
+    } 
+
+
+export default App;
 
 ```
