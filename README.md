@@ -1,3 +1,5 @@
+# REACT 공식문서 정리
+
 ```jsx
 const name = 'JS'
 const element = <h1>Hello, {name}</h1>
@@ -41,7 +43,7 @@ const element = (
 
 
 
-### const, let, function ~이있으면 쓸 때 {~}로 쓰기
+### const, let, function 이있으면 쓸 때 {~}로 쓰기
 
 
 element는 React앱의 가장 작은 단위입니다.
